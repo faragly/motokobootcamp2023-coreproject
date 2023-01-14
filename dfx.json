@@ -1,0 +1,20 @@
+{
+    "canisters": {
+        "hello": {
+            "type": "motoko",
+            "main": "src/backend/hello/main.mo"
+        },
+        "internet_identity": {
+            "type": "custom",
+            "candid": "src/backend/internet_identity/internet_identity.did",
+            "wasm": "src/backend/internet_identity/internet_identity.wasm",
+            "build": "./download_ii.sh",
+            "remote": {
+                "candid": "src/backend/internet_identity/internet_identity.did",
+                "id": {
+                    "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+                }
+            }
+        }
+    }
+}
