@@ -30,8 +30,10 @@ function initCanisterIds() {
 initCanisterIds();
 
 const canister_ids = {
-    HELLO_CANISTER_ID: canisters['hello'],
-    INTERNET_IDENTITY_CANISTER_ID: canisters['internet_identity']
+    DAO_CANISTER_ID: canisters['dao'],
+    INTERNET_IDENTITY_CANISTER_ID: canisters['internet_identity'],
+    WEBSITE_CANISTER_ID: canisters['website'],
+    MBT_LEDGER_CANISTER_ID: canisters['mbt_ledger']
 };
 
 module.exports = {

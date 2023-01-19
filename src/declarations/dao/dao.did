@@ -1,0 +1,5 @@
+type Proposal = record {};
+service : {
+  account_balance: () -> (nat);
+  get_all_proposals: () -> (vec Proposal) query;
+}

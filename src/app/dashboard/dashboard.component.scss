@@ -3,3 +3,35 @@
     justify-items: center;
     grid-row-gap: 1rem;
 }
+
+.principal {
+    display: grid;
+    grid-template-areas: 'head head' 'principal copy';
+    grid-template-rows: 1fr max-content;
+    grid-column-gap: .5rem;
+
+    h2 {
+        grid-area: head;
+    }
+    span {
+        grid-area: principal;
+        align-self: center;
+    }
+    .copy-button {
+        grid-area: copy;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        mat-icon {
+            height: 16px;
+            width: 16px;
+            font-size: 16px;
+        }
+    }
+}
+
+.balance {
+    display: flex;
+    align-items: center;
+    column-gap: .5rem;
+}

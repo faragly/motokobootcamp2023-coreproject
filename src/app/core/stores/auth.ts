@@ -4,10 +4,9 @@ import { AuthClient } from '@dfinity/auth-client';
 import { ActorSubclass, AnonymousIdentity, Identity } from '@dfinity/agent';
 import { filter, from, merge, switchMap } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { _SERVICE as HelloActor } from 'src/declarations/hello/hello.did';
-import { canisterId, idlFactory } from 'src/declarations/hello';
+import { _SERVICE as DAOActor } from 'src/declarations/dao/dao.did';
+import { canisterId, idlFactory } from 'src/declarations/dao';
 import { createActor } from '../utils/create-actor';
-import { Principal } from '@dfinity/principal';
 
 export enum AuthStatus {
     Anonymous,
@@ -17,9 +16,8 @@ export enum AuthStatus {
 export interface AuthState {
     status: AuthStatus;
     client: AuthClient;
-    actor: ActorSubclass<HelloActor>;
+    actor: ActorSubclass<DAOActor>;
     identity: Identity;
-    principal: string | null;
     isAuthenticated: boolean;
 }
 
@@ -43,7 +41,7 @@ export const authStateFactory = () => {
         filter(status => status === AuthStatus.Anonymous),
         switchMap(() => {
             const identity = new AnonymousIdentity();
-            return createActor<HelloActor>({ identity, canisterId, idlFactory }).pipe(map(actor => ({
+            return createActor<DAOActor>({ identity, canisterId, idlFactory }).pipe(map(actor => ({
                 identity, actor, isAuthenticated: false, principal: null
             })));
         })
@@ -53,7 +51,7 @@ export const authStateFactory = () => {
         switchMap(() => {
             const identity = state.get('client').getIdentity();
             const principal = identity.getPrincipal().toText();
-            return createActor<HelloActor>({ identity, canisterId, idlFactory }).pipe(map(actor => ({
+            return createActor<DAOActor>({ identity, canisterId, idlFactory }).pipe(map(actor => ({
                 identity, actor, isAuthenticated: true, principal
             })));
         })

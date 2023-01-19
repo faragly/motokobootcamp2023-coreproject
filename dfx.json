@@ -1,8 +1,21 @@
 {
     "canisters": {
-        "hello": {
+        "dao": {
             "type": "motoko",
-            "main": "src/backend/hello/main.mo"
+            "main": "src/backend/dao/main.mo"
+        },
+        "dao_frontend": {
+            "dependencies": ["dao"],
+            "frontend": {
+                "entrypoint": "dist/index.html"
+            },
+            "source": ["dist"],
+            "type": "assets"
+        },
+        "website": {
+            "type": "motoko",
+            "main": "src/backend/website/main.mo",
+            "dependencies": ["dao"]
         },
         "internet_identity": {
             "type": "custom",
@@ -15,6 +28,26 @@
                     "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
                 }
             }
+        },
+        "mbt_ledger": {
+            "type": "custom",
+            "candid": "src/backend/mbt_ledger/icrc1.did",
+            "wasm": "src/backend/mbt_ledger/icrc1.wasm",
+            "build": "",
+            "shrink": false,
+            "remote": {
+                "candid": "src/backend/mbt_ledger/icrc1.did",
+                "id": {
+                    "local": "r7inp-6aaaa-aaaaa-aaabq-cai",
+                    "ic": "db3eq-6iaaa-aaaah-abz6a-cai"
+                }
+            }
+        }
+    },
+    "defaults": {
+        "build": {
+            "args": "",
+            "packtool": "vessel sources"
         }
     }
 }
