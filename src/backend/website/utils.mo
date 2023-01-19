@@ -4,7 +4,7 @@ import Iter "mo:base/Iter";
 import Nat8 "mo:base/Nat8";
 import Nat32 "mo:base/Nat32";
 import Text "mo:base/Text";
-import SHA256 "mo:sha256/SHA256";
+import SHA256 "mo:crypto/SHA/SHA256";
 import Blob "mo:base/Blob";
 import Buffer "mo:base/Buffer";
 import Types "types";
@@ -30,24 +30,24 @@ module {
     */
 
     public func h(b1 : Blob) : Blob {
-        let d = SHA256.Digest();
+        let d = SHA256.New();
         d.write(Blob.toArray(b1));
-        Blob.fromArray(d.sum());
+        Blob.fromArray(d.sum([]));
     };
 
     public func h2(b1 : Blob, b2 : Blob) : Blob {
-        let d = SHA256.Digest();
+        let d = SHA256.New();
         d.write(Blob.toArray(b1));
         d.write(Blob.toArray(b2));
-        Blob.fromArray(d.sum());
+        Blob.fromArray(d.sum([]));
     };
 
     public func h3(b1 : Blob, b2 : Blob, b3 : Blob) : Blob {
-        let d = SHA256.Digest();
+        let d = SHA256.New();
         d.write(Blob.toArray(b1));
         d.write(Blob.toArray(b2));
         d.write(Blob.toArray(b3));
-        Blob.fromArray(d.sum());
+        Blob.fromArray(d.sum([]));
     };
 
     /*

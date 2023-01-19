@@ -1,6 +1,3 @@
-import CRC32 "./CRC32";
-import SHA224 "./SHA224";
-
 import Array "mo:base/Array";
 import Blob "mo:base/Blob";
 import Buffer "mo:base/Buffer";
@@ -8,6 +5,8 @@ import Nat32 "mo:base/Nat32";
 import Nat8 "mo:base/Nat8";
 import Principal "mo:base/Principal";
 import Text "mo:base/Text";
+import SHA224 "mo:crypto/SHA/SHA224";
+import CRC32 "./CRC32";
 
 module {
     // 32-byte array.
@@ -27,12 +26,12 @@ module {
     };
 
     public func accountIdentifier(principal : Principal, subaccount : Subaccount) : AccountIdentifier {
-        let hash = SHA224.Digest();
+        let hash = SHA224.New();
         hash.write([0x0A]);
         hash.write(Blob.toArray(Text.encodeUtf8("account-id")));
         hash.write(Blob.toArray(Principal.toBlob(principal)));
         hash.write(Blob.toArray(subaccount));
-        let hashSum = hash.sum();
+        let hashSum = hash.sum([]);
         let crc32Bytes = beBytes(CRC32.ofArray(hashSum));
         Blob.fromArray(Array.append(crc32Bytes, hashSum));
     };
@@ -49,9 +48,9 @@ module {
     };
 
     public func principalToSubaccount(principal : Principal) : Blob {
-        let idHash = SHA224.Digest();
+        let idHash = SHA224.New();
         idHash.write(Blob.toArray(Principal.toBlob(principal)));
-        let hashSum = idHash.sum();
+        let hashSum = idHash.sum([]);
         let crc32Bytes = beBytes(CRC32.ofArray(hashSum));
         Blob.fromArray(Array.append(crc32Bytes, hashSum));
     };
