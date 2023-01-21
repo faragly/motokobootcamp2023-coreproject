@@ -52,7 +52,7 @@
               "src/assets"
             ],
             "styles": [
-              "the-new-css-reset/css/reset.css",
+              "normalize.css/normalize.css",
               "src/styles.scss"
             ],
             "customWebpackConfig": {

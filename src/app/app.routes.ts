@@ -1,17 +1,15 @@
 import { Routes } from "@angular/router";
 import { dashboardGuard } from "./core/guards/dashboard.guard";
-import { loginGuard } from "./core/guards/login.guard";
 
 export const ROUTES: Routes = [
   {
     path: '',
-    loadComponent: () => import('./dashboard/dashboard.component').then(m => m.DashboardComponent),
-    canActivate: [dashboardGuard]
+    loadComponent: () => import('./proposals/proposals.component').then(m => m.ProposalsComponent),
   },
   {
-    path: 'login',
-    loadComponent: () => import('./login/login.component').then(m => m.LoginComponent),
-    canActivate: [loginGuard]
+    path: 'create',
+    loadComponent: () => import('./create-proposal/create-proposal.component').then(m => m.CreateProposalComponent),
+    canActivate: [dashboardGuard]
   },
   { path: '**', redirectTo: '' }
 ];

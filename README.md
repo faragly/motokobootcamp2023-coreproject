@@ -15,7 +15,7 @@ vessel verify --version 0.7.5
 dfx deploy
 ```
 
-> 💀 **Note**: I did not make MB ledger part of this project through submodules in order not to complicate this project. It is only needed for local development.
+> **Note**: I did not make MB ledger part of this project through submodules in order not to complicate this project. It is only needed for local development.
 
 ### MBT ledger deployment
 The MBT canister is based [on this](https://github.com/NatLabs/icrc1) implementation of the ICRC-1 standard.

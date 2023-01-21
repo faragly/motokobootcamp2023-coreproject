@@ -1,17 +1,19 @@
-<div class="principal" *ngIf="principal$ | async as principal">
-    <h2>Principal ID:</h2>
-    <span>{{ principal }}</span>
+<div class="principal">
+    <h4>Principal ID:</h4>
+    <span>{{ principal$ | async }}</span>
     <button mat-icon-button class="copy-button" (click)="copyPrincipal()" matTooltip="Copy principal ID to clipboard">
         <mat-icon fontIcon="content_copy"></mat-icon>
     </button>
 </div>
-<div>
+<!-- <div>
     <a mat-button matTooltip="Website canister ID" color="primary" [href]="websiteCanisterUrl" target="_blank">{{ websiteCanisterId }}</a>
 </div>
-<div class="balance">
-    <span>Balance: {{ balance$ | async }}</span>
-    <button mat-icon-button class="copy-button" (click)="updateBalance()" matTooltip="Refresh">
+ -->
+ <div class="balance">
+    <h4>Balance:</h4>
+    <span>{{ balance$ | async }}</span>
+    <button mat-icon-button class="refresh-button" (click)="updateBalance()" matTooltip="Refresh">
         <mat-icon fontIcon="refresh"></mat-icon>
     </button>
 </div>
-<button mat-raised-button (click)="authService.signOut()">Sign out</button>
+<button class="logout-button" mat-raised-button (click)="authService.signOut()">Sign out</button>

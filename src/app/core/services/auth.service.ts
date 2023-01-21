@@ -60,13 +60,7 @@ export class AuthService {
         return firstValueFrom(
             this.authState.select('client').pipe(
                 switchMap(client => from(client.logout())),
-                tap(() => this.authState.set({ status: AuthStatus.Anonymous })),
-                delayWhen(() => this.authState.select('isAuthenticated').pipe(filter(v => !v))),
-                tap(() => {
-                    const url = this.router.url;
-                    const redirect = url === '/' || url.startsWith('/login') ? undefined : url;
-                    this.router.navigate(['/login'], { queryParamsHandling: 'merge', queryParams: { redirect } });
-                })
+                tap(() => this.authState.set({ status: AuthStatus.Anonymous }))
             )
         );
     }

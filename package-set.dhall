@@ -6,26 +6,11 @@ let Package =
 
 let additions =
   [
-    { name = "io"
-    , repo = "https://github.com/aviate-labs/io.mo"
-    , version = "v0.3.1"
-    , dependencies = [ "base" ]
+    { name = "base"
+    , repo = "https://github.com/dfinity/motoko-base"
+    , version = "f602517f9e397e7ed404ad1b07e90d0562fc458a" -- Motoko 0.7.5 + timers
+    , dependencies = [] : List Text
     },
-    { name = "rand"
-    , repo = "https://github.com/aviate-labs/rand.mo"
-    , version = "v0.2.2"
-    , dependencies = [ "base", "encoding", "io" ]
-    },
-    { name = "uuid"
-    , repo = "https://github.com/aviate-labs/uuid.mo"
-    , version = "main"
-    , dependencies = [ "base", "encoding", "io" ]
-    },
-    { name = "crypto"
-    , repo = "https://github.com/aviate-labs/crypto.mo"
-    , version = "main"
-    , dependencies = [ "base", "encoding" ]
-    }
   ] : List Package
 
 in  upstream # aviate-labs # additions

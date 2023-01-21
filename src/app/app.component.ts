@@ -1,25 +1,21 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
-import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
-import { AUTH_RX_STATE } from './core/stores/auth';
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from "./sidebar/sidebar.component";
 
 @Component({
-  selector: 'app-root',
-  template: `
-    <mat-icon class="motoko-logo" svgIcon="ic:motoko-logo"></mat-icon>
-    <router-outlet></router-outlet>
+    selector: 'app-root',
+    template: `
+    <app-sidebar/>
+    <app-header/>
+    <div class="content">
+      <router-outlet/>
+    </div>
   `,
-  styleUrls: ['./app.component.scss'],
-  standalone: true,
-  imports: [RouterModule, MatIconModule]
+    styleUrls: ['./app.component.scss'],
+    standalone: true,
+    imports: [RouterModule, SidebarComponent, HeaderComponent]
 })
 export class AppComponent {
-  private matIconRegistry = inject(MatIconRegistry);
-  private domSanitizer = inject(DomSanitizer);
-  private authState = inject(AUTH_RX_STATE);
-
-  constructor() {
-    this.matIconRegistry.addSvgIconInNamespace('ic', 'motoko-logo', this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/motoko-logo.svg'));
-  }
+  
 }

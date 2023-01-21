@@ -28,8 +28,8 @@
     "@dfinity/utils": "0.0.6",
     "@rx-angular/state": "^1.7.0",
     "lodash": "^4.17.21",
+    "normalize.css": "^8.0.1",
     "rxjs": "~7.8.0",
-    "the-new-css-reset": "^1.8.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
   },

@@ -1,0 +1,7 @@
+<aside class="sidebar">
+    <mat-icon class="motoko-logo" svgIcon="ic:motoko-logo" routerLink="/"></mat-icon>
+    <nav>
+        <button *ngIf="authState.get('isAuthenticated')" mat-raised-button
+            [routerLink]="['/create']">Create proposal</button>
+    </nav>
+</aside>

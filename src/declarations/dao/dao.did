@@ -1,5 +1,67 @@
-type Proposal = record {};
+type VoteArgs = 
+ record {
+   proposalId: nat;
+   vote: Vote;
+ };
+type Vote = 
+ variant {
+   no;
+   yes;
+ };
+type Tokens = nat;
+type Time = int;
+type Result = 
+ variant {
+   err: text;
+   ok;
+ };
+type ProposalState = 
+ variant {
+   accepted;
+   executing;
+   failed: text;
+   open;
+   rejected;
+   succeeded;
+ };
+type ProposalPayload__1 = 
+ record {
+   canisterId: principal;
+   data: blob;
+   method: text;
+ };
+type ProposalPayload = 
+ record {
+   canisterId: principal;
+   data: blob;
+   method: text;
+ };
+type Proposal = 
+ record {
+   createdAt: Time;
+   id: nat;
+   owner: principal;
+   payload: ProposalPayload__1;
+   state: ProposalState;
+   voters: List;
+   votesNo: Tokens;
+   votesYes: Tokens;
+ };
+type ModifyParamsPayload = 
+ record {
+   proposalAcceptThreshold: opt Tokens;
+   proposalCreateThreshold: opt Tokens;
+   proposalVoteThreshold: opt Tokens;
+ };
+type List = 
+ opt record {
+       principal;
+       List;
+     };
 service : {
-  account_balance: () -> (nat);
-  get_all_proposals: () -> (vec Proposal) query;
+  getAllProposals: () -> (vec Proposal) query;
+  getProposal: (nat) -> (opt Proposal) query;
+  modifyParameters: (ModifyParamsPayload) -> ();
+  submitProposal: (ProposalPayload) -> ();
+  vote: (VoteArgs) -> (Result);
 }

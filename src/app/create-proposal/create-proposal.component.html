@@ -1,0 +1,61 @@
+<div class="mat-typography">
+    <h2>Create proposal</h2>
+    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start" animationDuration="0ms">
+        <mat-tab label="Website text">
+            <form class="form">
+                <mat-form-field class="textarea-field">
+                    <mat-label>Website text</mat-label>
+                    <textarea matInput [formControl]="textControl"></textarea>
+                    <mat-error *ngIf="textControl?.invalid && (textControl?.touched || textControl?.dirty)">
+                        This field is required
+                    </mat-error>
+                </mat-form-field>
+                <ng-container *ngIf="loading$ | async; then loadingButton; else submitButton"></ng-container>
+                <ng-template #submitButton>
+                    <button mat-raised-button color="primary" type="button" (click)="handleSubmitWebsiteProposal()"
+                        [disabled]="textControl.invalid">Submit proposal</button>
+                </ng-template>
+            </form>
+        </mat-tab>
+        <mat-tab label="Modify DAO parameters">
+            <form class="form" [formGroup]="daoParamsForm">
+                <div formArrayName="params">
+                    <div class="line" *ngFor="let t of params.controls; let i = index; let last = last" [formGroupName]="i">
+                        <mat-form-field>
+                            <mat-label>Select an option</mat-label>
+                            <mat-select formControlName="parameter" id="{{'parameter'+i}}">
+                                <mat-option *ngFor="let option of parameters$ | async" [value]="option.value"
+                                    [disabled]="option.disabled">{{
+                                    option.label
+                                    }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Value</mat-label>
+                            <input matInput formControlName="value" id="{{'value' + i}}" type="number"
+                                [disabled]="false">
+                        </mat-form-field>
+                        <button mat-icon-button type="button" (click)="deleteParameter(i)"
+                            [disabled]="params.controls.length == 1">
+                            <mat-icon fontIcon="delete"></mat-icon>
+                        </button>
+                        <button *ngIf="last" mat-icon-button type="button" (click)="addParameter()" [disabled]="daoParamsForm.invalid">
+                            <mat-icon fontIcon="add"></mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <ng-container *ngIf="loading$ | async; then loadingButton; else submitDaoButton"></ng-container>
+                <ng-template #submitDaoButton>
+                    <button mat-raised-button color="primary" type="button" (click)="handleSubmitDAOParamsProposal()"
+                        [disabled]="daoParamsForm.invalid">Submit proposal</button>
+                </ng-template>
+            </form>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+<ng-template #loadingButton>
+    <button class="has-spinner" mat-raised-button disabled type="button">
+        <mat-spinner class="mdc-button__icon" diameter="20"></mat-spinner>
+        <span>Loading...</span>
+    </button>
+</ng-template>

@@ -1,0 +1,4 @@
+<app-account *ngIf="authState.get('isAuthenticated'); else login"></app-account>
+<ng-template #login>
+    <app-login />
+</ng-template>
