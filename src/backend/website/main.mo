@@ -26,7 +26,7 @@ actor Website {
         switch (req) {
             case ({ method = "GET"; url = "/" }) {
                 let headersBuffer = Buffer.fromArray<HeaderField>(headers);
-                headersBuffer.add(certification_header());
+                headersBuffer.add(certificationHeader());
                 {
                     body = Text.encodeUtf8(text);
                     headers = Buffer.toArray(headersBuffer);
@@ -45,17 +45,17 @@ actor Website {
         };
     };
 
-    public shared({ caller }) func set_text(newText : Text) : async () {
+    public shared({ caller }) func setText(newText : Text) : async () {
         assert Principal.equal(caller, Principal.fromActor(DAO));
         text := newText;
-        update_asset_hash();
+        updateAssetHash();
     };
 
-    func update_asset_hash() {
-        CertifiedData.set(Utils.hash_tree(asset_tree()));
+    func updateAssetHash() {
+        CertifiedData.set(Utils.hashTree(assetTree()));
     };
 
-    func certification_header() : HeaderField {
+    func certificationHeader() : HeaderField {
         let cert = switch (CertifiedData.getCertificate()) {
             case (?c) c;
             case null {
@@ -71,13 +71,13 @@ actor Website {
 
         let bytes = Blob.toArray(cert);
         let encodedCert : Text = Utils.arrayToText(Base64.StdEncoding.encode(bytes));
-        let tree = Utils.cbor_tree(asset_tree());
+        let tree = Utils.cborTree(assetTree());
         let encodedTree : Text = Utils.arrayToText(Base64.StdEncoding.encode(tree));
 
         ("ic-certificate", "certificate=:" # encodedCert # ":, " # "tree=:" # encodedTree # ":");
     };
 
-    func asset_tree() : HashTree {
+    func assetTree() : HashTree {
         #labeled ("http_assets",
             #labeled ("/",
                 #leaf (Utils.h(Text.encodeUtf8(text)))
@@ -86,6 +86,6 @@ actor Website {
     };
 
     system func postupgrade() {
-        update_asset_hash();
+        updateAssetHash();
     };
 }

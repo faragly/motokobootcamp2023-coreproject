@@ -26,6 +26,11 @@ export const idlFactory = ({ IDL }) => {
     'votesNo' : Tokens,
     'payload' : ProposalPayload__1,
   });
+  const Params = IDL.Record({
+    'proposalCreateThreshold' : Tokens,
+    'proposalAcceptThreshold' : Tokens,
+    'proposalVoteThreshold' : Tokens,
+  });
   const ModifyParamsPayload = IDL.Record({
     'proposalCreateThreshold' : IDL.Opt(Tokens),
     'proposalAcceptThreshold' : IDL.Opt(Tokens),
@@ -41,6 +46,7 @@ export const idlFactory = ({ IDL }) => {
   const Result = IDL.Variant({ 'ok' : IDL.Null, 'err' : IDL.Text });
   return IDL.Service({
     'getAllProposals' : IDL.Func([], [IDL.Vec(Proposal)], ['query']),
+    'getParameters' : IDL.Func([], [Params], ['query']),
     'getProposal' : IDL.Func([IDL.Nat], [IDL.Opt(Proposal)], ['query']),
     'modifyParameters' : IDL.Func([ModifyParamsPayload], [], []),
     'submitProposal' : IDL.Func([ProposalPayload], [], []),

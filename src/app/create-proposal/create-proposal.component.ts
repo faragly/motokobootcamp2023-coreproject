@@ -103,7 +103,7 @@ export class CreateProposalComponent implements OnInit, OnDestroy {
     if (text) {
       const data = arrayBufferToUint8Array(IDL.encode([IDL.Text], [text]));
       const payload: ProposalPayload = {
-        method: 'set_text',
+        method: 'setText',
         canisterId: Principal.fromText(websiteCanisterId),
         data
       };

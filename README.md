@@ -2,13 +2,14 @@
 
 ## Local deployment
 To deploy this project locally you need
+- [install vessel](https://github.com/dfinity/vessel#getting-started) package manager
 - [Deploy **MBT ledger** canister](#mbt-ledger-deployment)
 - Edit `dfx.json`, paste the local `canisterId` of `icrc1` obtained in the previous step at `canisters.mbt_ledger.remote.id.local`
 - Install dependencies
 ```
 npm i
 vessel install
-vessel verify --version 0.7.5
+vessel verify --version 0.7.6
 ```
 - Deploy canisters
 ```

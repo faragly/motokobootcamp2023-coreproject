@@ -47,6 +47,12 @@ type Proposal =
    votesNo: Tokens;
    votesYes: Tokens;
  };
+type Params = 
+ record {
+   proposalAcceptThreshold: Tokens;
+   proposalCreateThreshold: Tokens;
+   proposalVoteThreshold: Tokens;
+ };
 type ModifyParamsPayload = 
  record {
    proposalAcceptThreshold: opt Tokens;
@@ -60,6 +66,7 @@ type List =
      };
 service : {
   getAllProposals: () -> (vec Proposal) query;
+  getParameters: () -> (Params) query;
   getProposal: (nat) -> (opt Proposal) query;
   modifyParameters: (ModifyParamsPayload) -> ();
   submitProposal: (ProposalPayload) -> ();

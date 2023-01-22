@@ -122,6 +122,10 @@ actor DAO {
             proposalAcceptThreshold = Option.get(payload.proposalAcceptThreshold, params.proposalAcceptThreshold);
         } : Params;
     };
+
+    public query func getParameters() : async Params {
+        params;
+    };
     
     // checking if the caller has enough funds to the action
     func hasRights(caller : Principal, action : Action) : async ?Nat {

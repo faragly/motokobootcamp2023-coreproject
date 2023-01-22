@@ -7,6 +7,11 @@ export interface ModifyParamsPayload {
   'proposalAcceptThreshold' : [] | [Tokens],
   'proposalVoteThreshold' : [] | [Tokens],
 }
+export interface Params {
+  'proposalCreateThreshold' : Tokens,
+  'proposalAcceptThreshold' : Tokens,
+  'proposalVoteThreshold' : Tokens,
+}
 export interface Proposal {
   'id' : bigint,
   'owner' : Principal,
@@ -42,6 +47,7 @@ export type Vote = { 'no' : null } |
 export interface VoteArgs { 'vote' : Vote, 'proposalId' : bigint }
 export interface _SERVICE {
   'getAllProposals' : ActorMethod<[], Array<Proposal>>,
+  'getParameters' : ActorMethod<[], Params>,
   'getProposal' : ActorMethod<[bigint], [] | [Proposal]>,
   'modifyParameters' : ActorMethod<[ModifyParamsPayload], undefined>,
   'submitProposal' : ActorMethod<[ProposalPayload], undefined>,

@@ -33,5 +33,5 @@ type HeaderField =
  };
 service : {
   http_request: (HttpRequest) -> (HttpResponse) query;
-  set_text: (text) -> ();
+  setText: (text) -> ();
 }

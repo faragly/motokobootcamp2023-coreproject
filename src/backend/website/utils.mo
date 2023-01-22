@@ -55,11 +55,11 @@ module {
     https://sdk.dfinity.org/docs/interface-spec/index.html#_certificate
     */
 
-    public func hash_tree(t : HashTree) : Hash {
+    public func hashTree(t : HashTree) : Hash {
         switch (t) {
             case (#empty) h("\11ic-hashtree-empty");
-            case (#fork(t1,t2)) h3("\10ic-hashtree-fork", hash_tree(t1), hash_tree(t2));
-            case (#labeled(l,t)) h3("\13ic-hashtree-labeled", l, hash_tree(t));
+            case (#fork(t1,t2)) h3("\10ic-hashtree-fork", hashTree(t1), hashTree(t2));
+            case (#labeled(l,t)) h3("\13ic-hashtree-labeled", l, hashTree(t));
             case (#leaf(v)) h2("\10ic-hashtree-leaf", v);
             case (#pruned(h)) h;
         }
@@ -74,7 +74,7 @@ module {
     few construct we need here.
     */
 
-    public func cbor_tree(tree : HashTree) : [Nat8] {
+    public func cborTree(tree : HashTree) : [Nat8] {
         let buf = Buffer.Buffer<Nat8>(100);
 
         // CBOR self-describing tag

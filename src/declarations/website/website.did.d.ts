@@ -29,5 +29,5 @@ export type StreamingStrategy = {
   };
 export interface _SERVICE {
   'http_request' : ActorMethod<[HttpRequest], HttpResponse>,
-  'set_text' : ActorMethod<[string], undefined>,
+  'setText' : ActorMethod<[string], undefined>,
 }
