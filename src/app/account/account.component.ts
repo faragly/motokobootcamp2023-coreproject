@@ -11,8 +11,6 @@ import { map } from 'rxjs';
 import { AuthService } from '../core/services/auth.service';
 import { AccountService } from '../core/services/account.service';
 import { formatMBT } from '../core/utils/formatMBT';
-import { canisterId } from 'src/declarations/mbt_ledger';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-account',
@@ -31,8 +29,6 @@ export class AccountComponent {
   balance$ = this.accountService.select('balance').pipe(
     map(amount => `${formatMBT(amount.toE8s())} ${amount.token.symbol}`)
   );
-  readonly websiteCanisterId = canisterId;
-  readonly websiteCanisterUrl = environment.websiteCanisterUrl;
 
   copyPrincipal() {
     const principalId = this.accountService.get('principal');

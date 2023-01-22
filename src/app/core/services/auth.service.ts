@@ -1,9 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { IdbStorage } from '@dfinity/auth-client';
 import { DelegationChain } from '@dfinity/identity';
 import { defer, EMPTY, filter, firstValueFrom, from, iif, of, repeat, switchMap, takeUntil, throwError, timer } from 'rxjs';
-import { catchError, delayWhen, map, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { isNull } from 'lodash';
 
 import { AUTH_RX_STATE, AuthStatus } from '../stores/auth';
@@ -12,7 +11,6 @@ import { environment } from 'src/environments/environment';
 @Injectable()
 export class AuthService {
     private authState = inject(AUTH_RX_STATE);
-    private router = inject(Router);
 
     anonymous$ = this.authState.select('status').pipe(filter(status => status === AuthStatus.Anonymous));
     initialized$ = this.authState.select('status').pipe(filter(status => status === AuthStatus.Initialized));

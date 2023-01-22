@@ -35,3 +35,9 @@ body {
     display: flex;
     align-items: center;
 }
+
+.mat-mdc-progress-bar.voting {
+    .mdc-linear-progress__buffer-bar {
+        background-color: #{mat.get-color-from-palette($app-warn)};
+    }
+}

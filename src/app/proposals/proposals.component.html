@@ -1,1 +1,4 @@
-<p>proposals works!</p>
+<ng-container *ngIf="loading$ | async as loading">
+    <app-proposal [data]="item" *ngFor="let item of items$ | async; trackBy: itemTrackBy"
+        [loading]="loading[item.id]" (vote)="handleVote($event)" [voting]="votingEnabled"></app-proposal>
+</ng-container>

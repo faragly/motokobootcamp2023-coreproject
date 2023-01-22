@@ -1,0 +1,21 @@
+<mat-card *ngIf="data" appearance="outlined">
+    <mat-card-header>
+        <mat-card-title>Proposal ID: {{ data.id }} - {{ data.state }}</mat-card-title>
+        <mat-card-subtitle>Owner: {{ data.owner }}</mat-card-subtitle>
+        <mat-card-subtitle>Created at: {{ data.createdAt | date:'long' }}</mat-card-subtitle>
+        <!-- <mat-card-subtitle>Voters: {{ data.voters.length }}</mat-card-subtitle> -->
+    </mat-card-header>
+    <mat-card-content>
+        <code><pre>{{ data.payload | json }}</pre></code>
+        <mat-divider *ngIf="data.state == 'open' && voting"></mat-divider>
+    </mat-card-content>
+    <ng-container *ngIf="data.state == 'open' && voting">
+        <mat-card-actions>
+            <button mat-button color="primary" (click)="vote.next({ id: data.id, vote: 'yes'})" [disabled]="loading">Yes ({{ yesPercent }})</button>
+            <button mat-button color="accent" (click)="vote.next({ id: data.id, vote: 'no'})" [disabled]="loading">No ({{ noPercent }})</button>
+        </mat-card-actions>
+        <mat-card-footer *ngIf="data.votesYes > 0 || data.votesNo > 0">
+            <mat-progress-bar class="voting" mode="determinate" bufferValue="0" [value]="percent"></mat-progress-bar>
+        </mat-card-footer>
+    </ng-container>
+</mat-card>

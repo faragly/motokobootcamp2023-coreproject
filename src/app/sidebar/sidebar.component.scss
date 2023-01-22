@@ -14,10 +14,18 @@
 nav {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    row-gap: 1rem;
+    padding: 0 1rem;
 }
 
 .balance {
     display: flex;
     align-items: center;
     column-gap: .5rem;
+}
+
+.sidebar {
+    position: sticky;
+    top: 0;
 }
