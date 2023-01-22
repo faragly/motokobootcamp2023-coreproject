@@ -1,4 +1,14 @@
-<ng-container *ngIf="loading$ | async as loading">
-    <app-proposal [data]="item" *ngFor="let item of items$ | async; trackBy: itemTrackBy"
-        [loading]="loading[item.id]" (vote)="handleVote($event)" [voting]="votingEnabled"></app-proposal>
+<mat-chip-listbox aria-label="Filter by state" [multiple]="true" [value]="selected$ | async"
+    (change)="handleFilter($event)">
+    <mat-chip-option [color]="option.color ?? 'primary'" *ngFor="let option of states$ | async; trackBy: chipTrackBy"
+        [value]="option.value">{{ option.label }} ({{ option.count }})</mat-chip-option>
+</mat-chip-listbox>
+<ng-container *ngIf="hasItems$ | async; else emptyTemplate">
+    <div class="wrapper" *ngIf="loading$ | async as loading">
+        <app-proposal [data]="item" *ngFor="let item of items$ | async; trackBy: itemTrackBy" [loading]="loading[item.id]"
+            (vote)="handleVote($event)" [voting]="votingEnabled"></app-proposal>
+    </div>
 </ng-container>
+<ng-template #emptyTemplate>
+    <app-empty></app-empty>
+</ng-template>

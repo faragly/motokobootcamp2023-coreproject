@@ -7,8 +7,15 @@
 }
 
 .motoko-logo {
-    width: 200px;
+    width: 230px;
     height: auto;
+}
+
+.ic-badge {
+    width: 210px;
+    height: auto;
+    justify-self: center;
+    margin-bottom: .5rem;
 }
 
 nav {
@@ -28,4 +35,9 @@ nav {
 .sidebar {
     position: sticky;
     top: 0;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100vh;
+    align-items: flex-start;
+    grid-row-gap: 1rem;
 }

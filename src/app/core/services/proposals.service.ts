@@ -5,7 +5,7 @@ import { catchError, combineLatestWith, defer, EMPTY, finalize, first, iif, map,
 import { get, has } from 'lodash';
 
 import { ProposalPayload, VoteArgs } from 'src/declarations/dao/dao.did';
-import { Proposal, Vote } from '../models';
+import { Proposal, ProposalState, Vote } from '../models';
 import { AUTH_RX_STATE } from '../stores/auth';
 import { fromTimestamp } from '../utils/date';
 import { convertProposalPayload, toProposalState } from '../utils/proposal';
@@ -13,6 +13,8 @@ import { AuthService } from './auth.service';
 
 interface State {
   items: Proposal[];
+  filters: ProposalState[];
+  filtered: boolean;
   loading: {
     items: boolean;
     submit: boolean;
@@ -32,6 +34,8 @@ export class ProposalsService extends RxState<State> {
     super();
     this.set({
       items: [],
+      filters: [],
+      filtered: false,
       loading: {
         items: false,
         submit: false,

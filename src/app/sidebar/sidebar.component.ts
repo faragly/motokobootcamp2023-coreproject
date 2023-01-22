@@ -27,5 +27,6 @@ export class SidebarComponent {
 
   constructor() {
     this.matIconRegistry.addSvgIconInNamespace('ic', 'motoko-logo', this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/motoko-logo.svg'));
+    this.matIconRegistry.addSvgIconInNamespace('ic', 'ic-badge', this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/ic-badge.svg'));
   }
 }

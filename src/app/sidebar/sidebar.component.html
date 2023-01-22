@@ -3,6 +3,8 @@
     <nav>
         <button *ngIf="authState.get('isAuthenticated')" mat-raised-button [routerLink]="['/create']">Create
             proposal</button>
-        <a mat-button matTooltip="Canister ID: {{ websiteCanisterId }}" color="primary" [href]="websiteCanisterUrl" target="_blank">Website</a>
+        <a mat-button matTooltip="Canister ID: {{ websiteCanisterId }}" color="primary" [href]="websiteCanisterUrl"
+            target="_blank">Website</a>
     </nav>
+    <mat-icon class="ic-badge" svgIcon="ic:ic-badge"></mat-icon>
 </aside>
