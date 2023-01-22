@@ -7,5 +7,11 @@
   },
   "website": {
     "ic": "7qusb-uqaaa-aaaak-qbvaa-cai"
+  },
+  "internet_identity": {
+    "ic": "rdmx6-jaaaa-aaaaa-aaadq-cai"
+  },
+  "mbt_ledger": {
+    "ic": "db3eq-6iaaa-aaaah-abz6a-cai"
   }
 }

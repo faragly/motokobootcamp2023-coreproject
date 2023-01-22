@@ -1,5 +1,12 @@
 # Motoko Bootcamp 2023 Core Project
 
+The application is deployed and is available via the link [**7xvuv-ziaaa-aaaak-qbvaq-cai**](https://7xvuv-ziaaa-aaaak-qbvaq-cai.ic0.app/).
+
+The application allows all authorized users to create proposals for changing the text on the [website](https://7qusb-uqaaa-aaaak-qbvaa-cai.ic0.app/), and also change the DAO system parameters - the minimum balance for voting for a proposal, the minimum balance for creating a proposal and the threshold for accepting a proposal. To get the current DAO system parameters, you need to run the following command:
+```
+dfx canister --network ic call uoca7-pyaaa-aaaak-qbu7q-cai getParameters
+```
+
 ## Local deployment
 To deploy this project locally you need
 - [install vessel](https://github.com/dfinity/vessel#getting-started) package manager
